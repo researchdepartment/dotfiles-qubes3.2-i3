@@ -2,6 +2,11 @@
 
 ### Important details:
 
+**After cloning:**
+
+	git submodule update --init
+
+
 **Qubes Install (dom0):**
 
 	username: sysadmin
