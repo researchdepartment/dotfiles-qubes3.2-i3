@@ -22,7 +22,9 @@ sudo cp -fr fonts/ /usr/share/fonts/
 sudo fc-cache -v
 # i3-gaps-qubes:
 sudo dnf reinstall dom0/i3-gaps-qubes.rpm
-
+# h264 codec
+sudo dnf install https://download1.rpmfusion.org/{free/fedora/rpmfusion-free,nonfree/fedora/rpmfusion-nonfree}-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf --enablerepo=rpmfusion install compat-ffmpeg28 ffmpeg-libs
 
 # Set up Template VM:
 ## dom0:
