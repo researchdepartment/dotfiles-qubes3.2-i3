@@ -35,7 +35,7 @@ mode "$mode_launcher" {
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec "i3-dmenu-desktop"
+bindsym $mod+d exec "sh ~/.config/i3/qubes_dmenu_run.sh"
 
 # change focus
 bindsym $mod+j focus left
@@ -89,16 +89,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "[1] IM"
-set $ws2 "[2] NET"
-set $ws3 "[3] MEDIA"
-set $ws4 "[4] DEV0"
-set $ws5 "[5] DEV1"
-set $ws6 "[6] SYS0"
-set $ws7 "[7] SYS1"
-set $ws8 "[8] SH"
-set $ws9 "[9] VM"
-set $ws10 "[0] DOM0"
+set $ws1 "1 [IM]"
+set $ws2 "2 [NET]"
+set $ws3 "3 [MEDIA]"
+set $ws4 "4 [DEV0]"
+set $ws5 "5 [DEV1]"
+set $ws6 "6 [SYS0]"
+set $ws7 "7 [SYS1]"
+set $ws8 "8 [SH]"
+set $ws9 "9 [VM]"
+set $ws10 "0 [DOM0]"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -205,4 +205,4 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 
-exec --no-startup-id xcompmgr #/compton
+exec --no-startup-id "xcompmgr -f -I 0.05 -O 0.04 -D 10" #/compton
