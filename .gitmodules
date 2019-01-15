@@ -1,0 +1,7 @@
+[submodule "dotfiles-template/.local/share/omf"]
+	path = dotfiles-template/.local/share/omf
+	url= https://github.com/oh-my-fish/oh-my-fish
+[submodule "dotfiles-dom0/.local/share/omf"]
+        path = dotfiles-dom0/.local/share/omf
+        url= https://github.com/oh-my-fish/oh-my-fish
+
