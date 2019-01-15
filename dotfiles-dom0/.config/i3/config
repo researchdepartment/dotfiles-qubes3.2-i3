@@ -35,7 +35,8 @@ mode "$mode_launcher" {
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec "sh ~/.config/i3/qubes_dmenu_run.sh"
+bindsym $mod+d exec i3-dmenu-desktop
+bindsym $mod+g exec "sh ~/.config/i3/qubes_dmenu_run.sh"
 
 # change focus
 bindsym $mod+j focus left
