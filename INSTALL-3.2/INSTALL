@@ -59,13 +59,14 @@ sudo dnf -y install kde-connect
 ## irl
 ## fedora-28 + appvm (standalone) + sys-net + red
 
-## streaming
+## stream
 ## fedora-28 + appvm (standalone) + sys-net + green
+# Do not run the following commands as sudo/root!!
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.spotify.Client
-# flatpak run com.spotify.Client
+##dom0: qvm-run -q --tray -a stream -- 'flatpak run com.spotify.Client'
 flatpak install flathub com.github.wwmm.pulseeffects
-# flatpak run wwmm.pulseeffects
+##dom0: qvm-run -q --tray -a stream -- 'flatpak run wwmm.pulseeffects'
 
 ## nsfw
 ## fedora-28 + appvm (standalone) + sys-whonix/sys-vpn + purple

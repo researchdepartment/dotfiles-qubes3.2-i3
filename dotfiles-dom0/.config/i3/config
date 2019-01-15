@@ -10,26 +10,22 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec xfce4-terminal
 
-set $mode_launcher [f] browser [c] terminal [w] file manager [e] editor [l] lock
+set $mode_launcher [c] terminal [f] file manager [e] editor [l] lock
 bindsym $mod+o mode "$mode_launcher"
 # exec --no-startup-id raiseorlaunch ${ARGUMENTS}
 mode "$mode_launcher" {
         #start terminal
         bindsym c mode "default";exec xfce4-terminal
 
-        # start browser
-        bindsym f mode "default";exec firefox
-
         # start screensaver / lock screen
         bindsym l mode "default";exec --no-startup-id ~/.config/i3/lockscreen.sh &
 
         # start editor
-        bindsym e mode "default";exec subl3
+        bindsym e mode "default";exec geany
 
         # start file browser
-        bindsym w mode "default";exec thunar
+        bindsym f mode "default";exec thunar
 
-        #
         bindsym Escape mode "default"
         bindsym Return mode "default"
         bindsym $mod+o mode "default"
@@ -40,7 +36,6 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec "i3-dmenu-desktop"
-#-nf '#BBBBBB' -nb '#222222' -sb '#A63A3A' -sf '#EEEEEE' -fn 'monospace-10' -p '>'"
 
 # change focus
 bindsym $mod+j focus left
@@ -94,16 +89,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "0"
+set $ws1 "[1] IM"
+set $ws2 "[2] NET"
+set $ws3 "[3] MEDIA"
+set $ws4 "[4] DEV0"
+set $ws5 "[5] DEV1"
+set $ws6 "[6] SYS0"
+set $ws7 "[7] SYS1"
+set $ws8 "[8] SH"
+set $ws9 "[9] VM"
+set $ws10 "[0] DOM0"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -162,7 +157,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-#bindsym $mod+Print exec --no-startup-id ~/Scripts/a52-upload.sh selection
+bindsym Print exec xfce4-screenshooter
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -182,7 +177,6 @@ gaps outer 4
 #smart_gaps on
 #smart_borders on
 
-exec compton
 exec nitrogen --restore
 exec redshift
 exec xscreensaver -no-splash
@@ -190,14 +184,14 @@ exec nm-applet
 
 bar {
 	position top
-	status_command i3status
+	status_command i3status --config ~/.config/i3/i3status.conf
 	colors {
 		focused_workspace	#6C3D3D #6A1515 #FFFFFF
 	}
 
 }
 
-#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id "setxkbmap -layout gb"
 exec_always --no-startup-id "xmodmap $HOME/.xmodmaprc"
 
@@ -211,4 +205,4 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 
-exec --no-startup-id xcompmgr
+exec --no-startup-id xcompmgr #/compton
