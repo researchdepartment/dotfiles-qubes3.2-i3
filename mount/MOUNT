@@ -1,0 +1,16 @@
+## Creating an encrypted container:
+fallocate -l 4GB ~/.Qubes/mount/Archive
+sudo cryptsetup -v luksFormat ~/.Qubes/mount/Archive
+sudo cryptsetup -v luksOpen /home/sysadmin/.Qubes/mount/Archive Archive
+sudo mkfs -t ext4 /dev/mapper/Archive
+
+# Mounting an encrypted container an a VM:
+## dom0:
+sudo cryptsetup -v luksOpen /home/sysadmin/.Qubes/mount/Archive Archive
+qvm-block | grep Archive
+# <host>:<drive> Documents 3 GiB
+qvm-block attach <vmname> <host>:<drive>
+## VM:
+mkdir ~/Archive
+sudo mount /dev/xvdi ~/Archive
+sudo chown user:user ~/Archive

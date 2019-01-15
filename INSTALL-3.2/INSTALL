@@ -1,0 +1,74 @@
+## POPULATE (optional)
+## BUILD (optional)
+
+# Copy over dotfiles:
+cp -fr ../dotfiles-dom0/.* ~
+
+
+# Install utilities + WM:
+## dom0:
+sudo qubes-dom-update i3 i3status fish htop tmux redshift nitrogen xcompmgr geany gdk-pixbuf2-devel
+sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing xscreensaver
+# numix theme + icons:
+sudo dnf install dom0/numix-gtk.rpm
+sudo dnf install dom0/numix-icon.rom
+sudo dnf install dom0/numix-icon-circle.rpm
+# neofetch:
+sudo cp -fr ../utils/neofetch /usr/bin/neofetch
+sudo chmod +x /usr/bin/neofetch
+# lucy-tewi
+sudo rm /etc/fonts/conf.d/25-no-bitmap-fedora.conf
+sudo cp -fr fonts/ /usr/share/fonts/
+sudo fc-cache -v
+# i3-gaps-qubes:
+sudo dnf reinstall dom0/i3-gaps-qubes.rpm
+
+
+# Set up Template VM:
+## dom0:
+qvm-copy-to-vm fedora-28 ../fonts/
+qvm-copy-to-vm fedora-28 ../dotfiles-template/
+## fedora-28:
+cp -fr QubesIncoming/dom0/dotfiles-template/.* ~
+sudo rm /etc/fonts/conf.d/25-no-bitmap-fedora.conf
+sudo cp -fr QubesIncoming/dom0/fonts/ /usr/share/fonts/
+sudo fc-cache -v
+sudo dnf -y install numix-icon-theme-circle numix-gtk-theme
+sudo dnf -y install xclip mpc tmux thunar tumbler viewnior nano fish terminator keepassxc gnome-tweak-tool
+
+
+# Set up other desired VMs:
+## sys-vpn
+## fedora-28 + proxyvm (standalone) + sys-net + red
+## dom0: qvm-copy-to-vm sys-vpn netvm.ovpn
+sudo dnf -y install cronie openvpn
+sudo crontab -e ## Add: @reboot /usr/sbin/openvpn --config /home/user/QubesIncoming/dom0/netvm.ovpn
+## Add 'crond' to sys-vpn's services in Qubes VM Settings
+## Reboot sys-vpn
+
+## sys-dev
+## fedora-28 + appvm (standalone) + sys-net + orange
+
+## sys-hostvm
+## fedora-28 + appvm (standalone) + sys-vpn + blue
+
+## personal
+## fedora-28 + appvm (standalone) + sys-vpn + black
+sudo dnf -y install kde-connect
+
+## irl
+## fedora-28 + appvm (standalone) + sys-net + red
+
+## streaming
+## fedora-28 + appvm (standalone) + sys-net + green
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.spotify.Client
+# flatpak run com.spotify.Client
+flatpak install flathub com.github.wwmm.pulseeffects
+# flatpak run wwmm.pulseeffects
+
+## nsfw
+## fedora-28 + appvm (standalone) + sys-whonix/sys-vpn + purple
+
+## commercial
+## fedora-28 + appvm + sys-net + blue

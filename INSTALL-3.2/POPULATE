@@ -1,0 +1,19 @@
+# Run these commands to download some things in advance (useful before going into qubes/dom0)
+
+# Download numix-gtk-theme, numix-icon-theme and numix-icon-theme-circle
+wget https://copr-be.cloud.fedoraproject.org/results/numix/numix/fedora-23-x86_64/00175934-numix/numix-gtk-theme-1010-6.git101307f.fc23.noarch.rpm -O INSTALL-3.2/dom0/numix-gtk.rpm
+wget https://copr-be.cloud.fedoraproject.org/results/numix/numix/fedora-23-x86_64/00175934-numix/numix-icon-theme-1010-6.git101307f.fc23.noarch.rpm -O INSTALL-3.2/dom0/numix-icon.rpm
+wget https://copr-be.cloud.fedoraproject.org/results/numix/numix/fedora-23-x86_64/00175934-numix/numix-icon-theme-circle-1010-6.git101307f.fc23.noarch.rpm -O INSTALL-3.2/dom0/numix-icon-circle.rpm
+
+# Download neofetch
+wget https://raw.githubusercontent.com/dylanaraps/neofetch/master/neofetch -O ../utils/neofetch
+
+# Download lucy-tewi
+git clone https://github.com/lucy/tewi-font
+cd tewi-font; make
+mv out/ ../fonts/tewi/
+
+# Also available via:
+	INSTALL-3.2/dom0/get-numix.sh
+	utils/get-neofetch.sh
+	fonts/get-tewi.sh

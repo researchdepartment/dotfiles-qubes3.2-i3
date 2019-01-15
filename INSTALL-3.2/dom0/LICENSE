@@ -1,0 +1,9 @@
+i3-gaps-qubes.rpm - built for Fedora 23 (x86_64)
+
+LICENSE: 
+	https://github.com/i3/i3/blob/next/LICENSE
+
+CREDIT:
+	i3 (https://github.com/i3/i3)
+	i3-gaps (https://github.com/Airblader/i3)
+	iq-gaps-qubes (patch) (https://github.com/unendingPattern/i3-gaps-qubes)

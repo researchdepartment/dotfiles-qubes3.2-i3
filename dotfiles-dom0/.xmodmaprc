@@ -1,0 +1,9 @@
+keycode 38 = a A NoSymbol NoSymbol adiaeresis Adiaeresis
+keycode 32 = o O NoSymbol NoSymbol odiaeresis Odiaeresis
+keycode 15 = 6 asciicircum NoSymbol NoSymbol otilde Otilde
+keycode 30 = u U NoSymbol NoSymbol udiaeresis Udiaeresis
+keycode 49 = grave backslash grave notsign bar bar bar bar grave asciitilde
+keycode 53 = x X greater greater greater greater
+keycode 52 = z Z less less less less
+keycode 24 = q Q at at at at
+
