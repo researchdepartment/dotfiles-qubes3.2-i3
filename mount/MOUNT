@@ -1,16 +1,26 @@
-## Creating an encrypted container:
-fallocate -l 4GB ~/.Qubes/mount/Archive
-sudo cryptsetup -v luksFormat ~/.Qubes/mount/Archive
-sudo cryptsetup -v luksOpen /home/sysadmin/.Qubes/mount/Archive Archive
-sudo mkfs -t ext4 /dev/mapper/Archive
+## Encrypted VM-specific Containers:
 
-# Mounting an encrypted container an a VM:
-## dom0:
-sudo cryptsetup -v luksOpen /home/sysadmin/.Qubes/mount/Archive Archive
-qvm-block | grep Archive
-# <host>:<drive> Documents 3 GiB
-qvm-block attach <vmname> <host>:<drive>
-## VM:
-mkdir ~/Archive
-sudo mount /dev/xvdi ~/Archive
-sudo chown user:user ~/Archive
+# Usage:
+encrypt-vm-container.sh testvm 15GB
+decrypt-vm-container.sh testvm
+
+lock-vm-container.sh testvm
+lock-all-containers.sh
+
+unlock-vm-container.sh testvm
+unlock-all-containers.sh
+
+restore-vm-nocontainer.sh testvm
+
+## explanation:
+# creating a new encrypted container:
+# moves appvms/container to appvms/enc-container
+# creates an encrypted luks image of the container in appvms/container.img
+# mounts the new luks image in appvms/container
+# copies all the files from appvms/enc-container to appvms/container
+
+# the user should remove appvms/enc-container manually afterwards once everything works fine
+# alternatively run: restore-vm-nocontainer.sh container
+
+# before being able to mount a vm, unlock-vm-container.sh or unlock-all-containers.sh must have been executed!
+# important: make a shutdown shortcut that runs lock-all-containers.sh before system shutdown!
