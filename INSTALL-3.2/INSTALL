@@ -22,11 +22,13 @@ sudo cp -fr fonts/ /usr/share/fonts/
 sudo fc-cache -v
 # i3-gaps-qubes:
 sudo dnf reinstall dom0/i3-gaps-qubes.rpm
+
 # Set up Template VM:
 ## dom0:
-qvm-copy-to-vm fedora-28 ../fonts/
-qvm-copy-to-vm fedora-28 ../dotfiles-template/
-## fedora-28:
+sudo qubes-dom-update qubes-template-fedora-28-minimal
+qvm-copy-to-vm fedora-28-minimal ../fonts/
+qvm-copy-to-vm fedora-28-minimal ../dotfiles-template/
+## fedora-28-minimal:
 cp -fr QubesIncoming/dom0/dotfiles-template/.* ~
 sudo rm /etc/fonts/conf.d/25-no-bitmap-fedora.conf
 sudo cp -fr QubesIncoming/dom0/fonts/ /usr/share/fonts/
@@ -39,7 +41,7 @@ sudo dnf -y --enablerepo=rpmfusion-free install compat-ffmpeg28 ffmpeg-libs
 
 # Set up other desired VMs:
 ## sys-vpn
-## fedora-28 + proxyvm (standalone) + sys-net + red
+## fedora-28-minimal + proxyvm (standalone) + sys-net + red
 ## dom0: qvm-copy-to-vm sys-vpn netvm.ovpn
 sudo dnf -y install cronie openvpn
 sudo crontab -e ## Add: @reboot /usr/sbin/openvpn --config /home/user/QubesIncoming/dom0/netvm.ovpn
@@ -47,20 +49,20 @@ sudo crontab -e ## Add: @reboot /usr/sbin/openvpn --config /home/user/QubesIncom
 ## Reboot sys-vpn
 
 ## sys-dev
-## fedora-28 + appvm (standalone) + sys-net + orange
+## fedora-28-minimal + appvm (standalone) + sys-net + orange
 
 ## sys-hostvm
-## fedora-28 + appvm (standalone) + sys-vpn + blue
+## fedora-28-minimal + appvm (standalone) + sys-vpn + blue
 
 ## personal
-## fedora-28 + appvm (standalone) + sys-vpn + black
+## fedora-28-minimal + appvm (standalone) + sys-vpn + black
 sudo dnf -y install kde-connect
 
 ## irl
-## fedora-28 + appvm (standalone) + sys-net + red
+## fedora-28-minimal + appvm (standalone) + sys-net + red
 
 ## stream
-## fedora-28 + appvm (standalone) + sys-net + green
+## fedora-28-minimal + appvm (standalone) + sys-net + green
 # Do not run the following commands as sudo/root!!
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.spotify.Client
@@ -68,8 +70,11 @@ flatpak install flathub com.spotify.Client
 flatpak install flathub com.github.wwmm.pulseeffects
 ##dom0: qvm-run -q --tray -a stream -- 'flatpak run wwmm.pulseeffects'
 
-## nsfw
-## fedora-28 + appvm (standalone) + sys-whonix/sys-vpn + purple
-
 ## commercial
-## fedora-28 + appvm + sys-net + blue
+## fedora-28-minimal + appvm + sys-net + blue
+
+## nsfw
+## fedora-28-minimal + appvm (standalone) + sys-whonix/sys-vpn + purple
+
+## social
+## fedora-28-minimal + appvm + sys-vpn + grey
