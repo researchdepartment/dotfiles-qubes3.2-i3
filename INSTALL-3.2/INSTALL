@@ -22,8 +22,6 @@ sudo cp -fr fonts/ /usr/share/fonts/
 sudo fc-cache -v
 # i3-gaps-qubes:
 sudo dnf reinstall dom0/i3-gaps-qubes.rpm
-
-
 # Set up Template VM:
 ## dom0:
 qvm-copy-to-vm fedora-28 ../fonts/
@@ -35,6 +33,8 @@ sudo cp -fr QubesIncoming/dom0/fonts/ /usr/share/fonts/
 sudo fc-cache -v
 sudo dnf -y install numix-icon-theme-circle numix-gtk-theme
 sudo dnf -y install xclip mpc tmux thunar tumbler viewnior nano fish terminator keepassxc gnome-tweak-tool
+sudo dnf -y install https://download1.rpmfusion.org/{free/fedora/rpmfusion-free,nonfree/fedora/rpmfusion-nonfree}-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf -y --enablerepo=rpmfusion-free install compat-ffmpeg28 ffmpeg-libs
 
 
 # Set up other desired VMs:
